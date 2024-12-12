@@ -1,0 +1,15 @@
+.task-list {
+    background: var(--accent-color);
+    border-radius: 30px;
+    padding-bottom: 30px;
+    box-shadow: 0px 5px 25px var(--shadow-color);
+}
+
+.task-heading {
+    color: var(--primary-color);
+    padding: 10px 20px 0 20px;
+}
+
+.task-due {
+    padding: 10px 20px 0 20px;
+}

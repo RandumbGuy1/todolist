@@ -1,0 +1,9 @@
+<section>
+    <form>
+        <input type="text" placeholder="Enter Task Name" #task>
+        <button class="primary" type="button" (click)="addTask(task.value)">Add</button>
+    </form>
+</section> 
+<section class="results">
+    <app-task *ngFor="let task of taskList" [task]="task"></app-task>
+</section>
