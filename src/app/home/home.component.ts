@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
+import { TaskService } from '../taskservice';
 
 import { Task } from '../task';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,8 @@ declare function refresh(): void;
 })
 
 export class HomeComponent {
+  taskService: TaskService = inject(TaskService);
+
   taskList: Task[] = [];
   filteredTaskList: Task[] = [];
 
@@ -33,8 +36,7 @@ export class HomeComponent {
     if (task.length == 0) return;
 
     var datetime = new Date();
-
-    this.taskList.push({
+    this.taskService.addTask({
       id: this.count,
       name: task,
       createDate: datetime.toISOString(),
@@ -48,14 +50,12 @@ export class HomeComponent {
   }
 
   deleteTask($event: number) {
-    this.taskList = this.taskList.filter(task => task.id !== $event);
+    this.taskService.deleteTask($event);
     this.resetList();
   }
 
   toggleTask($event: number) {
-    var task = this.taskList.filter(task => task.id === $event)[0];
-    task.completed = !task.completed;
-
+    this.taskService.toggleTask($event);
     this.resetList();
   }
 
@@ -65,6 +65,7 @@ export class HomeComponent {
   }
 
   resetList() {
+    this.taskList = this.taskService.getAllTasks();
     this.filteredTaskList = this.taskList.filter(task => !task.completed || !this.filterComplete);
   }
 
