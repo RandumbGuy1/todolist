@@ -1,9 +1,15 @@
 <section>
-    <form>
-        <input type="text" placeholder="Enter Task Name" #task>
-        <button class="primary" type="button" (click)="addTask(task.value)">Add</button>
+    <form [formGroup]="taskForm" (submit)="addTask()">
+        <input id="task-name" class="form-control" type="text" formControlName="taskName" placeholder="Enter task" required>
+        <button [disabled]="taskForm.invalid" id="submitButton" type="submit" class="primary">Submit</button>
     </form>
+    <br>
+    <label class="switch">
+        <input type="checkbox" (change)="toggleFilter()" id="filter" name="filter" [checked] = filterComplete>
+        <span class="slider round"></span>
+    </label>
+    <label for="filter" style="text-align: center;"> Hide Completed</label>
 </section> 
 <section class="results">
-    <app-task *ngFor="let task of taskList" [task]="task"></app-task>
+    <app-task *ngFor="let task of filteredTaskList" [task]="task" (deleteEvent)="deleteTask($event)"(toggleEvent)="toggleTask($event)"></app-task>
 </section>

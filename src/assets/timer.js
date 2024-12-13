@@ -1,5 +1,7 @@
+var tasks = undefined;
+
 function start() {
-    setInterval(() => {
+    interval = setInterval(() => {
         tasks = document.querySelectorAll(".task-list");
         
         tasks.forEach(task => {
@@ -10,30 +12,34 @@ function start() {
             display.innerHTML = millisecondsToStopWatch(deltaMilliseconds);
         })
     }, 1000);
+}
 
-    function millisecondsToStopWatch(milliseconds) {
-        time = []
-        // time units in milliseconds
-        s = 1000;
-        m = 60 * s;
-        h = 60 * m;
-        d = 24 * h;
-        conversions = [d, h, m, s];
-        // get the number of days
-        conversions.forEach(t => {
-            elapsed = Math.floor(milliseconds / t);
-            if (elapsed > 0 || time.length > 0) {
-                time.push(elapsed);
-                // remove the time elapsed from milliseconds
-                milliseconds -= elapsed * t
-            }
-        })
-        if (time.length > 1) {
-            return time.map(el => el.toString().padStart(2, '0')).join(':');
+function refresh() {
+    tasks = document.querySelectorAll(".task-list");
+}
+
+function millisecondsToStopWatch(milliseconds) {
+    time = []       
+    s = 1000;
+    m = 60 * s;
+    h = 60 * m;
+    d = 24 * h;
+    conversions = [d, h, m, s];
+   
+    conversions.forEach(t => {
+        elapsed = Math.floor(milliseconds / t);
+        if (elapsed > 0 || time.length > 0) {
+            time.push(elapsed);
+
+            milliseconds -= elapsed * t
         }
-        if (time.length > 0) {
-            return `:${time[0]?.toString().padStart(2, '0')}`;
-        }
-        return ":00";
+    })
+
+    if (time.length > 1) {
+        return time.map(el => el.toString().padStart(2, '0')).join(':');
     }
+    if (time.length > 0) {
+        return `0:${time[0]?.toString().padStart(2, '0')}`;
+    }
+    return "0:00";
 }

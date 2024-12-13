@@ -6,13 +6,28 @@
   
 body {
     font-family: 'Be Vietnam Pro', sans-serif;
+    color: rgb(199, 201, 225);
+    background-color: rgb(30, 30, 30);
 }
 
 :root {
     --primary-color: #5dc87d;
+    --primary-hover-color: #3e8d55;
+    --primary-click-color: #235d33;
+
     --secondary-color: #52bd7b;
-    --accent-color: #ebf3ee;
-    --shadow-color: #d3d3d3;
+
+    --warning-color: #ee4949;
+    --warning-hover-color: #a93030;
+    --warning-click-color: #7c1e1e;
+
+    --accent-color: #272d2a;
+    --hidden-color: #373c39;
+    --shadow-color: #000000;
+}
+
+.hidden {
+    color: var(--hidden-color);
 }
   
 button.primary {
@@ -22,3 +37,97 @@ button.primary {
     color: white;
     border-radius: 8px;
 }
+
+button.primary:hover {
+    border: solid 1px var(--primary-hover-color);
+    background: var(--primary-hover-color);
+
+    transition-duration: 0.4s;
+}
+
+button.primary:active {
+    border: solid 1px var(--primary-click-color);
+    background: var(--primary-click-color);
+
+    transition-duration: 0.1s;
+}
+
+button.warning {
+    padding: 10px;
+    border: solid 1px var(--warning-color);
+    background: var(--warning-color);
+    color: white;
+    border-radius: 8px;
+}
+
+button.warning:hover {
+    border: solid 1px var(--warning-hover-color);
+    background: var(--warning-hover-color);
+    transition-duration: 0.4s;
+}
+
+button.warning:active {
+    border: solid 1px var(--warning-click-color);
+    background: var(--warning-click-color);
+    transition-duration: 0.1s;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }

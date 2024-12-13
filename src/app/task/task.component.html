@@ -1,6 +1,16 @@
 <section class="task-list">
-    <h2 class="task-heading">{{task.name}}</h2>
+    <h2 class="task-heading">{{task.name}} </h2>
+    <p class="hidden" hidden><strong>DEBUG</strong> id: {{task.id}} completed: {{task.completed}} </p>
+
+    <label class="switch">
+        <input type="checkbox" (change)="toggleTask(task.id)" id="completed" name="completed" [checked]="task.completed">
+        <span class="slider round"></span>
+    </label>
+    <label for="completed"> Completed</label><br>
+
     <p class="task-due"><strong>Due </strong>{{task.dueDate}}</p>
-    <h3 class="task-due timer-display"> &nbsp; :00 </h3>
-    <div class="start-time" hidden>{{ task.createDate }}</div>
+    <p class="task-due timer-display">0:00&nbsp;</p>
+    <p class="start-time" hidden>{{ task.createDate }}</p>
+
+    <button class="warning" type="button" (click)="deleteTask(task.id)">Delete</button>
 </section>
